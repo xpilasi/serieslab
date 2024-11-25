@@ -1,7 +1,6 @@
 <script >
-//Aquí importamos el componente Title
 
-import CardLastReviews from '../Cards/CardLastReviews.vue';
+import CardLastReviews from '@/components/principales/cards/CardUserLastReviews.vue';
 
 
 export default {
