@@ -33,7 +33,7 @@ return{
         type: String,
         required:true,
     },
-    srcImg: {
+    srcImgProp: {
         type: String,
         required:true,
     }
@@ -46,12 +46,16 @@ return{
       rating: '',
       userEmail: '',  
       username: '',
+      imgSrc:'',
+      serieName:'',
       objetoReview:{
+        serieNombre:'',
         fecha: '',
         comentario: '',
         rate: '',
         idSerie: '',
         emailUsuario: '',
+        srcImg:''
       },
    
 }
@@ -62,11 +66,14 @@ return{
     },
     async submitReview() {
       this.objetoReview = {
-      fecha : this.date,
-      comentario : this.review,
-      rate : Number(this.rating),
-      idSerie : Number(this.serieId),
-      emailUsuario : this.useUser.isLoggedIn ? this.useUser.userEmail : 'Invitado',
+
+        serieNombre : this.nombreSerie,
+        fecha : new Date().toLocaleDateString(),
+        comentario : this.review,
+        rate : Number(this.rating),
+        idSerie : Number(this.serieId),
+        emailUsuario : this.useUser.isLoggedIn ? this.useUser.userEmail : 'Invitado',
+        srcImg:this.srcImgProp,
     }
 
       console.log(this.objetoReview);
@@ -87,16 +94,10 @@ return{
 
 
   mounted() {
-   this.getCurrentData()
-   console.log(this.date);
-   
+    this.serieNombre = this.serieName
+    this.getCurrentData()
     this.id = this.serieId
-   console.log(this.date);
-   
-    this.id = this.serieId
-    console.log(`Prueba : ${this.id}`);
-   
-    console.log(this.objetoReview);
+    this.imgSrc = this.srcImgProp
     
     
     

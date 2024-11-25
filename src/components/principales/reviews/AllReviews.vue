@@ -140,7 +140,7 @@ export default {
       class="pt-4 h-auto lg:px-20"
     >
       <div
-        class="reviewrounded-2xl bg-red-300 h-full flex flex-col p-6"
+        class="reviewrounded-2xl bg-secondaryBackground rounded-2xl h-full flex flex-col p-6"
       >
         <div class="flex flex-row justify-between w-full items-center mb-4">
           <div class="flex flex-row items-center gap-2">
@@ -151,7 +151,7 @@ export default {
             <span class="text-gray-400 px-4">
               <data value="dateNow">{{ review.lastUpdate }}</data>
             </span>
-            <div class="text-gray-300 text-sm">
+            <div class="text-primary text-sm">
               {{ review.userEmail }}
             </div>
           </div>

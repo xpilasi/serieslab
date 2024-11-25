@@ -90,7 +90,7 @@ export default {
    
     :serieId="reviewId" 
     :nombreSerie="reviewData.name" 
-    :srcImg="reviewData.profile_path"
+    :srcImgProp="pathBaseSrcImg+reviewData.poster_path"
      />
     <AllReviews 
    :serieId="String(reviewId)"
