@@ -176,7 +176,7 @@ export default {
           </div>
         </div>
 
-        <div class="text-gray-300 leading-relaxed">
+        <div class="text-gray-300 text-sm leading-relaxed">
           {{ review.comment }}
         </div>
       </div>
