@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "serieslab",
+			"path": "."
+		},
+		{
+			"name": "firebase",
+			"path": "../laSalle/vue/SeriesLab/SeriesLab/firebase"
+		}
+	],
+	"settings": {}
+}
