@@ -8,7 +8,7 @@ import Footer from './components/principales/Footer.vue'
 import { RouterLink,RouterView } from 'vue-router'
 import { useReviewsFirestore } from '../stores/reviewsFirestore.js'
 import SearchBar from './components/principales/widgets/SearchBar.vue'
-import LogInAuth from './components/principales/auth/LogInAuth.vue'
+import LogInAuth from '@/components/principales/auth/LogInAuth.vue';
 import {useLoginState} from '../stores/stateWidgetsStore.js'
 import {  House, UserRound } from 'lucide-vue-next'
 import { monitorAuthState } from '../firebase/firebase.js'

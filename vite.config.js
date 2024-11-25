@@ -5,7 +5,12 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   build: {
-    outDir: 'dist', // Para Netlify 
+    outDir: 'dist', // Para Netlify
   },
-  base: '/', 
+  base: '/',
+  resolve: {
+    alias: {
+      '@': '/src', 
+    },
+  },
 })
