@@ -137,23 +137,29 @@ export default {
     <div
       v-for="review in filteredReviews"
       :key="review.id"
-      class="pt-4 h-auto lg:px-20"
+      class="pt-4 h-auto lg:px-20 mx-5 lg:mx-0 "
     >
       <div
         class="reviewrounded-2xl bg-secondaryBackground rounded-2xl h-full flex flex-col p-6"
       >
-        <div class="flex flex-row justify-between w-full items-center mb-4">
-          <div class="flex flex-row items-center gap-2">
-            <button>
+        <div class="flex flex-col md:flex-row justify-between w-full  items-center mb-4">
+
+          <!-- nota -->
+          <div class="flex flex-col md:flex-row items-center gap-2">
+            <div class="flex justify-center gap-3">
+              <button>
               <Star color="#dcd62e" strokeWidth="{3}" fill="#dcd62e" />
             </button>
             <span class="font-medium">{{ review.rating }}/10</span>
+            </div>
+            
+            <div class="text-primary text-sm pl-5">
+              {{ review.userEmail.length > 20 ? review.userEmail.slice(0,20) : review.userEmail }}
+            </div>
             <span class="text-gray-400 px-4">
               <data value="dateNow">{{ review.lastUpdate }}</data>
             </span>
-            <div class="text-primary text-sm">
-              {{ review.userEmail }}
-            </div>
+            
           </div>
 
           <div class="flex flex-row gap-2">

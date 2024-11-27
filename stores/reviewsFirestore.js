@@ -29,15 +29,18 @@ export const useReviewsFirestore = defineStore('reviews', {
         //Read reviews:
         async readReviews() {
             this.reviewsFirestore = await getAllReviewsFirestore();
-            console.log('Reviews actualizadas:', this.reviewsFirestore);
+            ;
         },
 
         //Crear review
         async createReview({ objetoReview }) {
             console.log('CREANDO REVIEW');
             
+         
             try {
                 await addDoc(collection(getFirestore(), 'all-reviews-series'), {
+                    serieName: objetoReview.serieNombre,
+                    srcImage: objetoReview.srcImg,
                     creationDate: objetoReview.fecha,
                     comment: objetoReview.comentario,
                     rating: Number(objetoReview.rate),
@@ -82,6 +85,16 @@ export const useReviewsFirestore = defineStore('reviews', {
                 console.error('Error al eliminar la review:', error);
                 return false;
             }
+        },
+
+        //Listar todas las reviews de un usuario:
+        filterReviewsByUser(userEmail) {
+            if (!userEmail) {
+                console.warn("Email de usuario no proporcionado para filtrar.");
+                return [];
+            }
+            // Filtra las reviews en reviewsFirestore por el campo userEmail
+            return this.reviewsFirestore.filter(review => review.userEmail === userEmail);
         }
     }
 })

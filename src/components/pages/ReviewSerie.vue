@@ -93,6 +93,7 @@ export default {
     :srcImgProp="pathBaseSrcImg+reviewData.poster_path"
      />
     <AllReviews 
+    class="pb-10"
    :serieId="String(reviewId)"
     />
 </div>

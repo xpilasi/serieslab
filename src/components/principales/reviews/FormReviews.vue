@@ -107,9 +107,12 @@ return{
 
 <template>
   <div v-if="useUser.isLoggedIn" class="w-full flex flex-col justify-center items-center px-5 lg:px-20 my-3">
-    <div class="w-full bg-secondaryBackground grid grid-cols-3 justify-center rounded-2xl">
-      <div class="header col-span-3 flex justify-between mx-10 mt-8">
-        <div class="flex items-center">
+    <div class="w-full bg-secondaryBackground  justify-center rounded-2xl px-5">
+      
+      <div class="flex md:flex-row flex-col md:justify-between justify-center items-center gap-2  mt-8 ">
+
+        <!-- nota -->
+        <div class="flex items-center ">
           <div class="flex gap-x-2 items-center">
             <select v-model="rating" name="" id="" class="bg-mainBackground px-2 py-2">
               <option value="">Nota</option>
@@ -128,12 +131,22 @@ return{
           </div>
           <button><Star color="#dcd62e" strokeWidth={3} fill="#dcd62e" /></button>
         </div>
-        <span v-if="useUser.isLoggedIn" class="text-primary">{{useUser.userEmail}} </span>
+
+        <!-- mail -->
+        <span v-if="useUser.isLoggedIn" class="text-primary ">{{useUser.userEmail}} </span>
+
+
+        <!-- usuario -->
         <span v-else class="text-purple-300" >invitad@</span>
-        <span class="text-center">{{ date }}</span>
+
+        <!-- fecha -->
+        <span class="text-center  ">{{ date }}</span>
+
       </div>
-      <textarea v-model="review" class="col-span-3 mt-10 mb-5 mx-10 rounded bg-mainBackground h-40 text-gray-100 pt-3 pl-3" name="" id="" placeholder="Escribe tu review"></textarea>
+
+      <textarea v-model="review" class="w-full mt-10 mb-5  rounded bg-mainBackground h-40 text-gray-100 pt-3 pl-3" name="" id="" placeholder="Escribe tu review"></textarea>
       <div class="col-span-3 flex justify-center mb-5"><Button @click="submitReview( { serieId })" buttonText="Enviar"></Button></div>
+    
     </div>
   </div>
 </template>

@@ -26,6 +26,12 @@ export default {
       UserRound,
       LoadingText
     },
+    props:{
+      arrayFiltrado:{
+        type:Array,
+        default: () => []
+      }
+    },
     data(){
         return{
             
@@ -58,6 +64,18 @@ export default {
       }
     
     },
+    mounted(){
+      console.log(this.arrayFiltrado.length);
+      
+    },
+    watch: {
+    arrayFiltrado: {
+        handler(newVal) {
+            console.log('Prop arrayFiltrado actualizado en Login:', newVal);
+        },
+        immediate: true // Ejecuta el watcher inmediatamente al montar
+    }
+}
     
 }
 </script>
@@ -68,7 +86,6 @@ export default {
 
   <div class="flex col-span-2 lg:justify-between mb-2  text-xs justify-end ">
     <div class="flex flex-row items-center justify-center gap-x-3 ">
-      <!-- <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="rounded-full w-8 h-8" alt=""> -->
       <div class="flex flex-row gap-2 items-center lg:text-xs text-sm">
         <span class="lg:block hidden">Hola </span>
         <div class="lg:hidden block"><UserRound width="20px"/></div>
@@ -88,8 +105,7 @@ export default {
     </button>
   </div>
   <span class="text-xs lg:block hidden">Total reviews</span>
-  <span class="text-right text-xs lg:block hidden">8</span>
-  <span class="text-xs lg:block hidden">Votos</span>
-  <span class="text-right text-xs lg:block hidden">4</span>
+  <span class="text-right text-xs lg:block hidden">{{ arrayFiltrado.length ? arrayFiltrado.length : 0 }}</span>
+
 </div>
 </template>
