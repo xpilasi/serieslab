@@ -30,7 +30,7 @@ export default {
 
     <div class="bg-white bg-opacity-5 rounded-2xl flex flex-row ">
         <div class="col-1 w-2/3 3xl:w-3/4 flex flex-col p-4">
-            <h4 class="text-sm mb-1 h-10">{{ nombreSerie }}</h4>
+            <h4 class="text-sm mb-1 h-10">{{ nombreSerie.length > 20 ? `${nombreSerie.slice(0,23)}...` :nombreSerie }}</h4>
             <div class="flex flex-row items-center justify-center  ">
 
                 <Star color="#dcd62e" strokeWidth={3} fill="#dcd62e" width="50px"/>
