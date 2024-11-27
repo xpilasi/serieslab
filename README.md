@@ -53,7 +53,7 @@ npm run dev
 ``` 
 The app will be available at http://localhost:5173.
 
-### 5  📂 Project Structure
+### 5  Project Structure
 src/  
 ├── components/          # Reusable components  
 ├── views/               # Main views (pages)  
@@ -69,13 +69,13 @@ src/
 - Enable Firestore Database and Authentication (using Email/Password).
 - Add the credentials to the .env file
 
-### 6   📝 Contributors
+### 7   Contributors
 
-- Xavi -->
-- Mary -->
-- Carlos -->
-- Gonzalo -->
+- Xavi --> https://github.com/xpilasi
+- Mary --> https://github.com/MaryQuiroz
+- Carlos --> https://github.com/carlos-full-stack
+- Gonzalo --> https://github.com/GontxiPino
 
-### 6   📧 Contact
+### 8   📧 Contact
 If you have questions or want to collaborate, feel free to contact us:
 Email: pilasiha@gmail.com
