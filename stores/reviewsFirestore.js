@@ -29,7 +29,8 @@ export const useReviewsFirestore = defineStore('reviews', {
         //Read reviews:
         async readReviews() {
             this.reviewsFirestore = await getAllReviewsFirestore();
-            ;
+            console.log(this.reviewsFirestore);
+            
         },
 
         //Crear review

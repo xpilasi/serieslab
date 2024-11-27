@@ -7,6 +7,7 @@ import SearchBar from './widgets/SearchBar.vue';
 import { useReviewsFirestore } from '../../../stores/reviewsFirestore';
 import { useUserStore } from '../../../stores/userStore'
 import { useLoginState } from '../../../stores/stateWidgetsStore';
+import AllReviews from './reviews/AllReviews.vue';
 
 export default {
 
@@ -26,7 +27,9 @@ export default {
         return{
             // useReviews : useReviewsFirestore(),
             useUser : useUserStore(),
-            arrayFiltradoUser : []
+            useTheReviews : useReviewsFirestore(),
+            arrayFiltradoUser : [],
+            allReviewsFirestore:[]
         }
         
 
@@ -35,20 +38,18 @@ export default {
 
      
     },
-    async created(){
-
-        try{
-            await this.useReviews.readReviews()
-            this.arrayFiltradoUser = this.useReviews.filterReviewsByUser(this.useUser.userEmail)
+    async created() {
+        try {
+            await this.useReviews.readReviews();
+            this.arrayFiltradoUser = [...this.useReviews.filterReviewsByUser(this.useUser.userEmail)];
             console.log(this.arrayFiltradoUser);
+            this.allReviewsFirestore = [...this.useTheReviews.reviewsFirestore]
+            console.log(this.allReviewsFirestore);
             
-        }catch(e){
-
+        } catch (e) {
+            console.error('Error al leer reviews:', e);
         }
-     
-           
-            
-    },
+        },
 
     components:{
     
@@ -57,17 +58,33 @@ export default {
         SearchBar,
         Login
 
+    },
+    watch: {
+        'useReviews.reviews': {
+            handler(newReviews) {
+            // Filtra y actualiza el array local
+            this.arrayFiltradoUser = [...this.useReviews.filterReviewsByUser(this.useUser.userEmail)];
+            },
+            deep: true // Observa cambios profundos en el array del store
+  }
+},
+    computed: {
+    arrayFiltradoUser() {
+        return this.useReviews.filterReviewsByUser(this.useUser.userEmail);
+    }
     }
 }
 </script>
 <template>
     
-    <div class=" bg-secondaryBackground h-full flex flex-col gap-y-10 items-center justify-start px-8 z-50">
+    <div class=" bg-secondaryBackground h-screen flex flex-col gap-y-10 items-center justify-start px-8 z-50 overflow-y-auto pb-5">
         <SearchBar />
         <Login 
         :arrayFiltrado="arrayFiltradoUser" />
-        <UserLastReviewsContainer v-if="arrayFiltradoUser.length > 0"
+        <UserLastReviewsContainer v-if="useUser.userEmail"
         :arrayFiltrado="arrayFiltradoUser" />
+        <UserLastReviewsContainer v-else
+        :arrayFiltrado="allReviewsFirestore" />
       
     </div>
   

@@ -57,6 +57,17 @@ export default {
 
     },
     
+    watch: {
+    '$route.params.id': {
+      handler(newId) {
+        // Cuando el ID cambie, vuelve a cargar los datos
+        this.reviewId = newId;
+        this.fetchReviewDetails();
+      },
+      immediate: true, // Ejecuta el watcher de inmediato cuando el componente se monta
+    },
+  },
+    
 }
 
 
@@ -64,7 +75,7 @@ export default {
 </script>
 <template>
     
-    <div class=" min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-center align-middle w-full">
+    <div class=" min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-start align-middle w-full ">
 <div class="flex flex-col">
     <div v-if="loading !=true">
         <TopReview 

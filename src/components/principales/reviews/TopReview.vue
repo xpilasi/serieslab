@@ -42,8 +42,8 @@ export default {
 </script>
 
 <template>
-    <div class="lg:h-96 pb-5  flex flex-col lg:pb-5  ">
-        <div class="lg:px-20 hidden  h-1/5 lg:flex lg:flex-row justify-between items-center bg-gradient-to-b from-gray-700 to-transparent  ">
+    <div class=" pb-5   flex flex-col lg:pb-5  ">
+        <div class="lg:px-20 hidden h-16 lg:flex lg:flex-row justify-between items-center bg-gradient-to-b from-gray-700 to-transparent  mb-5">
             <RouterLink to="/">
                 <LogoSeriesLab class="pt-1"/>
             </RouterLink>

@@ -91,12 +91,12 @@ export default {
       <Login/>
     </div>
 
-    <div id='lef-side'class="lg:w-3/4 w-full mt-5 lg:mt-0  ">
+    <div id='lef-side'class="lg:w-[calc(100%-300px)] w-full mt-5 lg:mt-0  ">
       
       <RouterView/> 
     </div>
 
-    <div class="lg:w-1/4 lg:min-w-[230px]  lg:fixed  lg:top-0 lg:right-0 h-full hidden lg:block ">
+    <div class="lg:w-[300px] lg:min-w-[300px]  lg:fixed  lg:top-0 lg:right-0 h-full hidden lg:block  ">
       <SideBarRight/>
       
     </div>

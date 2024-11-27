@@ -21,11 +21,8 @@ export default {
         return{
        
         pathUrl: '/review-serie/',
+        reviewId : null,
         }
-    },
-    mounted(){
-    
-      
     },
 
     watch: {
@@ -34,7 +31,8 @@ export default {
             console.log('arrayFiltrado actualizado:', newVal);
         },
         immediate: true
-    }
+    },
+   
     }
 }
 </script>
