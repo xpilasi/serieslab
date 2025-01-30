@@ -55,7 +55,7 @@ export default {
             .then(res=>res.json())
             .then(data=>{
                 setTimeout(()=>{
-                    this.arrayTopRated = data.results.slice(0,6)
+                    this.arrayTopRated = data.results.slice(0,20)
                 },1000)
                 
                 

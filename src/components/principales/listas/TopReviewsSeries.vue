@@ -1,145 +1,129 @@
-<script >
-import { RouterLink,RouterView } from 'vue-router';
+<script>
+import { RouterLink } from 'vue-router';
 import LoadingSpinner from '../widgets/LoadingSpinner.vue';
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+// Import required Swiper modules
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default {
-  props:{
-    arrayFromFirestore:{type:Array}
-
+  props: {
+    arrayFromFirestore: { type: Array }
   },
-  setup() {
-      return {
-       
-      };
-    },
-
-  //Aquí llamamos a todos los componentes
-    components:{
-     LoadingSpinner,
-
-     
-     
-    },
-    data(){
-        return{
-          pathBaseSrcImg:'https://image.tmdb.org/t/p/w200/',
-          pathUrl: '/review-serie/',
-          currentIndex:0,
-          slidesToShow: 5, // Número de elementos visibles por pantalla
-          
-            
-        }
-        
-    },
-    methods:{
-
-      nextSlide(){
-        const lastIndex = this.arrayFromFirestore.length - this.slidesToShow;
-
-        console.log(`Index actual:${this.currentIndex+1}`);
-        if (this.currentIndex < this.arrayFromFirestore.length - 1) {
-        this.currentIndex++;
-        } else {
-          this.currentIndex = 0; // Vuelve al inicio
-        }
-      },
-
-      prevSlide() {
-        console.log(`Index actual:${this.currentIndex+1}`);
-        
-        if (this.currentIndex > 0) {
-          this.currentIndex--;
-        } else {
-          this.currentIndex = 0; 
-        }
-      },
-
-      updateSlidesToShow() {
-
-        const width = window.innerWidth;
-
-        if (width < 640) {
-          this.slidesToShow = 2; 
-          console.log(this.slidesToShow);
-          // Teléfonos
-        } else if (width < 1024) {
-          this.slidesToShow = 4; // Tablets
-          console.log(this.slidesToShow);
-        } else {
-          this.slidesToShow = 5; // Escritorio
-          console.log(this.slidesToShow);
-        }
+  
+  components: {
+    LoadingSpinner,
+    Swiper,
+    SwiperSlide
   },
-    },
-    mounted() {
 
-      this.updateSlidesToShow(); 
-      window.addEventListener("resize", this.updateSlidesToShow);
-    },
-    beforeDestroy() {
-      window.removeEventListener("resize", this.updateSlidesToShow);
-    },
+  data() {
+    return {
+      pathUrl: '/review-serie/',
+      // Swiper configuration
+      swiperOptions: {
+        modules: [Navigation, Pagination, Autoplay],
+        slidesPerView: 5,
+        spaceBetween: 10,
+        navigation: true,
+        breakpoints: {
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 5
+          },
+          640: {
+            slidesPerView: 4,
+            spaceBetween: 8
+          },
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 10
+          }
+        }
+      }
+    }
+  }
 }
 </script>
 
-
 <template>
-
-
-  <div class=" font-poppinsLight  text-white flex flex-col   ">
-   
-     <h2 v-if="arrayFromFirestore.length > 0" class="text-lg lg:pl-20 pl-5  ">Top Reviews </h2>
-     
-     <div class="flex flex-row gap-4 w-full h-auto   ">
-
-   
-          <!-- Carrusel -->
-    <div v-if="arrayFromFirestore.length > 0" class="relative  " >
-
-      <div  class="relative overflow-hidden w-full h-auto ">
-        <div
-          class="flex flex-row justify-between transition-transform duration-500 ease-in-out lg:pl-20 pl-5   py-5 relative"
-          :style="{ transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)` }"
-        >
-         
-          <RouterLink
-            v-for="(serie, index) in arrayFromFirestore"
-            :key="serie.serieId"
-            :to="pathUrl + serie.serieId"
-            class="flex-shrink-0  mr-7 shadow-lg shadow-black rounded-2xl "
-          >
-            <img
-              :src="serie.srcImage"
-              :alt="serie.serieName"
-              class="  w-full h-full object-cover rounded-2xl hover:scale-105 transition-all ease-in-out duration-100"
-            />
-          </RouterLink>
-        </div>
-      </div>
-      
-       <button v-if="currentIndex > 0"
-        class="absolute top-[183px] left-0 h-[310px] hover:opacity-100 opacity-0 transition-all duration-500 ease-in-out  flex justify-center items-center transform -translate-y-1/2 bg-gradient-to-r  from-gray-900 to-transparent bg-opacity-50 text-white text-5xl  px-4 "
-        @click="prevSlide"
-      >
-        ‹
-      </button>
-      <button v-if="currentIndex < arrayFromFirestore.length - slidesToShow"
-        class="absolute top-[183px] right-0 transform hover:opacity-100 opacity-0 h-[310px] -translate-y-1/2 transition-all duration-500 ease-in-out   text-white p-2 text-5xl px-4 bg-gradient-to-l  from-gray-900  to-transparent bg-opacity-50 "
-        @click="nextSlide"
-      >
-        ›
-      </button>
-    </div>       
-
-   
-        <!-- Spinner si no hay datos -->
-        <div v-else  class="flex h-80 flex-col justify-center items-center w-full">
-          <LoadingSpinner/>
-        </div>
-
-      </div>
+  <div class="font-poppinsLight text-white flex flex-col">
+    <h2 v-if="arrayFromFirestore.length > 0" class="text-lg lg:pl-20 pl-5">Top Reviews</h2>
     
+    <div class="flex flex-row gap-4 w-full h-auto">
+      <!-- Swiper Component -->
+      <div v-if="arrayFromFirestore.length > 0" class="w-full lg:px-20 px-5">
+        <swiper
+          :modules="swiperOptions.modules"
+          :slides-per-view="swiperOptions.slidesPerView"
+          :space-between="swiperOptions.spaceBetween"
+          :navigation="swiperOptions.navigation"
+          :breakpoints="swiperOptions.breakpoints"
+          class="mySwiper"
+        >
+          <swiper-slide
+            v-for="serie in arrayFromFirestore"
+            :key="serie.serieId"
+            class="p-3"
+          >
+            <RouterLink
+              :to="pathUrl + serie.serieId"
+              class="block overflow-hidden shadow-xl shadow-black/40 hover:shadow-xl hover:shadow-black/60 rounded-xl transition-all duration-300 ease-in-out"
+            >
+              <div class="aspect-[2/3] relative">
+                <img
+                  :src="serie.srcImage"
+                  :alt="serie.serieName"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 ease-in-out"
+                />
+              </div>
+            </RouterLink>
+          </swiper-slide>
+        </swiper>
+      </div>
 
-
+      <!-- Spinner si no hay datos -->
+      <div v-else class="flex h-80 flex-col justify-center items-center w-full">
+        <LoadingSpinner />
+      </div>
+    </div>
   </div>
 </template>
+
+<style>
+/* Custom Swiper Navigation Styles */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.swiper:hover .swiper-button-next,
+.swiper:hover .swiper-button-prev {
+  opacity: 1;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1.5rem !important;
+}
+
+/* Add these new styles */
+.swiper-slide {
+  height: auto;
+}
+
+.swiper {
+  padding: 15px 0;
+  margin: 0 -15px;
+  width: calc(100% + 30px);
+}
+</style>
